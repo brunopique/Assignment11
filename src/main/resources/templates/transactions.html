@@ -1,0 +1,65 @@
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+	<title>Online Bank</title>
+	<link rel="stylesheet" href="/css/transactions.css" />
+	<!-- Couldn't make 'label' tags bold within 'transactions.css',
+	so I applied style below -->
+	<style>
+		label {
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:if="${transactionsModel} != null">
+		<h2>Transaction History</h2>
+
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Date</th>
+				<th>Retailer</th>
+				<th>Funds In</th>
+				<th>Funds Out</th>
+			</tr>
+			<tr th:each="transaction : ${transactionsModel}">
+				<td th:inline="text"><a
+						th:href="@{/transactions/{transactionId}(transactionId=${transaction.id})}">[[${transaction.id}]]</a>
+				</td>
+				<td th:inline="text">[[${transaction.date}]]</td>
+				<td th:inline="text">[[${transaction.retailer}]]</td>
+				<!-- For some reason, if I use 'th:if' inside the 'td' tags below, 
+					both conditionals don't work at the same time (but they do inside 'span') -->
+				<td th:inline="text"><span th:if="${transaction.type} == 'C'">[[${transaction.amount}]]</span></td>
+				<td th:inline="text"><span th:if="${transaction.type} == 'D'">[[${transaction.amount}]]</span></td>
+			</tr>
+		</table>
+	</div>
+
+	<div th:if="${transactionModel} != null">
+		<h2>Transaction ID: <span th:inline="text">[[${transactionModel.id}]]</span>
+			<span th:switch="${transactionModel.type}">
+				<span th:case="'C'">Credit</span>
+				<span th:case="'D'">Debit</span>
+			</span>
+		</h2>
+		<br>
+		<div>
+			<label for="date">Date: </label>
+			<span th:inline="text" id="date">[[${transactionModel.date}]]</span>
+		</div>
+		<div>
+			<label for="amount">Amount: </label>
+			<span th:inline="text" id="amount">[[${transactionModel.amount}]]</span>
+		</div>
+		<div>
+			<label for="description">Description: </label>
+			<span th:inline="text" type="text" id="description">[[${transactionModel.description}]]</span>
+		</div>
+		<a href="/transactions">back</a>
+	</div>
+</body>
+
+</html>
