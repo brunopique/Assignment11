@@ -20,11 +20,11 @@ public class TransactionRepository {
 	}
 	
 	public Transaction findById(Long transactionId) {
-		for (Transaction transaction : transactions) {
-			if (transactionId.equals(transaction.getId()))
-					return transaction;
-		}
-		return null;
+		// use 'stream()' instead of for loop
+		return transactions.stream()
+						   .filter(transaction -> transactionId.equals(transaction.getId()))
+						   .findAny()
+						   .orElse(null);
 	}
 	
 	public List<Transaction> findAll () {

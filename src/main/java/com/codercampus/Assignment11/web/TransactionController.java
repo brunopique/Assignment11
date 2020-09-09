@@ -15,7 +15,7 @@ import com.codercampus.Assignment11.service.TransactionService;
 public class TransactionController {
 	
 	@Autowired
-	TransactionService transactionService;
+	private TransactionService transactionService;
 	
 	@GetMapping("/transactions")
 	public String getTransactions(ModelMap modelMap) {

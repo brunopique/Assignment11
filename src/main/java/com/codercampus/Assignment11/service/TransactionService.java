@@ -13,7 +13,7 @@ import com.codercampus.Assignment11.repository.TransactionRepository;
 public class TransactionService {
 	
 	@Autowired
-	TransactionRepository transactionRepository;
+	private TransactionRepository transactionRepository;
 	
 	public Transaction findById(Long transactionId) {
 		return transactionRepository.findById(transactionId);

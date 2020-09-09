@@ -39,23 +39,24 @@
 	</div>
 
 	<div th:if="${transactionModel} != null">
-		<h2>Transaction ID: <span th:inline="text">[[${transactionModel.id}]]</span>
+		<h2>
+			Transaction ID: 
+			<span th:inline="text">[[${transactionModel.id}]]</span>
 			<span th:switch="${transactionModel.type}">
-				<span th:case="'C'">Credit</span>
-				<span th:case="'D'">Debit</span>
+				<span th:case="'C'">(Credit)</span>
+				<span th:case="'D'">(Debit)</span>
 			</span>
 		</h2>
-		<br>
-		<div>
-			<label for="date">Date: </label>
+		<div style="margin-top: 2em">
+			<label>Date: </label>
 			<span th:inline="text" id="date">[[${transactionModel.date}]]</span>
 		</div>
 		<div>
-			<label for="amount">Amount: </label>
+			<label>Amount: </label>
 			<span th:inline="text" id="amount">[[${transactionModel.amount}]]</span>
 		</div>
 		<div>
-			<label for="description">Description: </label>
+			<label>Description: </label>
 			<span th:inline="text" type="text" id="description">[[${transactionModel.description}]]</span>
 		</div>
 		<a href="/transactions">back</a>
